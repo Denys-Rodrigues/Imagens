@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Imagens.Models.Produto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a class="btn btn-outline-primary" aps-action="Create">
+        Inserir Produto
+    </a>
+</p>
+
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model =>model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>
+            <th class="text-center">Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model) 
+        {
+            <tr class="align-middle">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+                <td>
+                    @{
+                        try{
+                            var base64 = Convert.ToBase64String(@item.Foto);
+                            if (!string.IsNullOrEmpty(base64))
+                            {
+                                var imgSrc = String.Format("data:imagem/png;base64,{0}", base64);
+                                <img class="img-fluid" src="@imgSrc" width="100" />
+                            }
+                        }
+                        catch
+                        {
+                            <img class="img-fluid" src="http://www.puspfc.usp.br/sistemas/prefeitura/imgs/sem_foto.png" 
+                            width="70" />
+                        }
+                    }
+                </td>
+                <td class="text-center">
+                    <a class="btn-primary btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">
+                        Editar
+                    </a>
+                    <a class="btn-primary btn-outline-info btn-sm" asp-action="Datails" asp-route-id="@item.Id">
+                        Detalhes
+                    </a>
+                    <a class="btn-primary btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">
+                        Apagar
+                    </a>
+                </td>
+            </tr>
+        }
+   </tbody>
+</table>
