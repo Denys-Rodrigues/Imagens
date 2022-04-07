@@ -5,7 +5,7 @@
 }
 
 <p>
-    <a class="btn btn-outline-primary" aps-action="Create">
+    <a class="btn btn-outline-primary" asp-action="Create">
         Inserir Produto
     </a>
 </p>
@@ -60,7 +60,7 @@
                     }
                 </td>
                 <td class="text-center">
-                    <a class="btn-primary btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">
+                    <a class="btn-primary btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@item.Id">
                         Editar
                     </a>
                     <a class="btn-primary btn-outline-info btn-sm" asp-action="Datails" asp-route-id="@item.Id">
